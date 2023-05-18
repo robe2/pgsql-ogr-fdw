@@ -49,7 +49,8 @@ jobs:
         # sudo $PGBIN/pg_ctlcluster ${{ matrix.ci.PGVER }} main stop
         sudo cp ./ci/pg_hba.conf $PGETC/pg_hba.conf
         sudo systemctl stop postgresql
-        sudo $PGBIN/pg_ctlcluster ${{ matrix.ci.PGVER }} main restart
+        sudo pg_ctlcluster ${{ matrix.ci.PGVER }} main start
+        sudo pg_lsclusters
         #sudo systemctl restart postgresql
         #sudo su postgres -c "$PGBIN/pg_ctl --pgdata $PGDATA start -o '-c config_file=$PGETC/postgresql.conf -p 5432'"
 
