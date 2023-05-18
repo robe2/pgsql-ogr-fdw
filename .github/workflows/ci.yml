@@ -27,6 +27,16 @@ jobs:
     - name: 'Check Out'
       uses: actions/checkout@v3
 
+    - name: 'Force apt.postgresql.org to have higher priority'
+      run: |
+        cat << EOF >> ./pgdg.pref
+        Package: *
+        Pin: release o=apt.postgresql.org
+        Pin-Priority: 600
+        EOF
+        sudo cp ./pgdg.pref  /etc/apt/preferences.d/
+        sudo apt update
+
     - name: 'Install GDAL'
       run: |
         sudo apt-get install libgdal-dev
